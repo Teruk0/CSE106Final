@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #header-container {
+    background-color: rgb(8, 62, 80);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center vertically */
+  }
+  
+  #logo-container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto; /* Center horizontally */
+  }
+  
+  #logo-container img {
+    max-height: 150px; /* Adjust the height as needed */
+    max-width: 100%; /* Ensure the image doesn't overflow its container */
+  }
+  

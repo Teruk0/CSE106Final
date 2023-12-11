@@ -1,0 +1,152 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#header-container {
+  background-color: rgb(8, 62, 80);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Center vertically */
+}
+
+#logo-container {
+  display: flex;
+  align-items: center;
+  margin: 0 auto; /* Center horizontally */
+}
+
+#logo-container img {
+  max-height: 150px; /* Adjust the height as needed */
+  max-width: 100%; /* Ensure the image doesn't overflow its container */
+}
+
+#sign-out-button button {
+  padding: 8px 15px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+#question-container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+#question-text {
+  width: 100%;
+  padding: 10px;
+}
+
+#filter-container {
+  width: 50%;
+  margin: 20px auto; /* Adjust the margin as needed */
+}
+
+#filter-text {
+  width: 100%;
+  padding: 10px;
+}
+
+
+#questions-list {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next row */
+}
+
+.question-box {
+  border: 2px solid #333;
+  margin-top: 20px;
+  padding: 20px;
+  position: relative;
+  max-width: calc(100% - 40px); /* Adjust the width as needed */
+  word-wrap: break-word;
+  box-sizing: border-box;
+  width: 100%; /* Set the width to 100% for responsiveness */
+  margin: 10px;
+  overflow: auto; /* Add a scrollbar if the content exceeds the box height */
+}
+
+.username-div {
+  width: 100%; /* Adjust the width as needed */
+  background-color: lightblue; /* Background color for the username div */
+  padding: 10px; /* Padding for the background box */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  height: auto; /* Allow the box to adjust its height based on content */
+}
+
+.question-text-div {
+  width: 100%; /* Adjust the width as needed */
+  padding: 10px; /* Padding for the question text div */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.votes-div {
+  width: 25%; /* Adjust the width to create two rows with some spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.vote-buttons button {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.vote-count {
+  font-size: 16px; /* Adjust the font size as needed */
+}
+
+.reply-div,
+.question-div {
+  width: 48%; /* Adjust the width to create two rows with some spacing */
+  background-color: rgb(208, 208, 208);
+  padding: 10px;
+}
+
+.reply-button {
+  cursor: pointer;
+}
+
+.reply-button-div {
+  width: 100%; /* Adjust the width as needed */
+  padding: 10px; /* Padding for the reply button div */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.response-div {
+  width: 100%; /* Adjust the width as needed */
+  margin-top: 10px; /* Adjust the margin as needed */
+  border: 1px solid #ddd;
+  padding: 10px;
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.reply-container {
+  height: 100px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scroll if the content exceeds the height */
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.reply-input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.answer-button {
+  cursor: pointer;
+  padding: 8px 15px;
+  background-color: #fff;
+  border: 1px solid #333;
+}
+
+#replies-container {
+  max-height: 200px; /* Set a maximum height for the scrollable container */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+

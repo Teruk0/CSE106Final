@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <div id="header-container">
+    <div id="logo-container">
+        <a href="https://www.ucmerced.edu/">
+            <img src="ucm.jpg" alt="Logo">
+        </a>
+  </div>
+
+  <div id="signin-container">
+    <!-- Add the action attribute to point to the login endpoint -->
+    <form action="/login" method="POST">
+      <input type="text" placeholder="Username" name="username" required>
+      <input type="password" placeholder="Password" name="password" required>
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+
+  <!-- Add a script to handle the form submission -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+  
+        const username = document.querySelector('input[name="username"]').value;
+        const password = document.querySelector('input[name="password"]').value;
+  
+        // Redirect to the appropriate route with the user ID
+        window.location.href = '/my-classes/' + username;
+      });
+    });
+  </script>
+</body>
+</html>

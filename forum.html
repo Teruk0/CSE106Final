@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum App</title>
+    <link rel="stylesheet" type="text/css" href="forum.css">
+</head>
+<body>
+
+<div id="header-container">
+    <div id="logo-container">
+        <a href="https://www.ucmerced.edu/">
+            <img src="ucm.jpg" alt="Logo">
+        </a>
+    </div>
+    <div id="sign-out-button">
+        <!-- Updated onclick attribute -->
+        <button onclick="signOut()">Sign Out</button>
+    </div>
+</div>
+
+<div id="question-container">
+    <div id="question-input">
+        <input type="text" id="question-text" placeholder="Enter your question... (300 Character limit)">
+        <button onclick="postQuestion()">Post</button>
+        <div id="filter-container">
+            <div id="filter-input">
+                <input type="text" id="filter-text" placeholder="Filter or search questions...">
+                <button onclick="search()">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="questions-list">
+        <!-- Questions will be dynamically added here -->
+        <div id="replies-container"></div>
+    </div>
+</div>
+
+<script src="forum.js"></script>
+
+<script>
+    // JavaScript function to handle sign-out
+    function signOut() {
+        // Redirect to login.html
+        window.location.href = "login.html";
+    }
+</script>
+
+</body>
+</html>
