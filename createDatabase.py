@@ -15,18 +15,18 @@ def createTable(_conn):
     _cur.execute("""
     create table if not exists post (
         p_id integer primary key,
-        p_userId char(100) not null,
+        p_userId integer not null,
         p_question char(300) not null,
-        p_upvotes char(100) not null,
-        p_downvotes char(100) not null
+        p_upvotes integer not null,
+        p_downvotes integer not null
     );
     """)
 
     _cur.execute("""
     create table if not exists response (
         r_id integer primary key,
-        r_postId char(100) not null,
-        r_userId    
+        r_postId integer not null,
+        r_userId integer not null,
         r_response char(300) not null,
         r_upvotes integer not null,
         r_downvotes integer not null
@@ -35,7 +35,6 @@ def createTable(_conn):
     _conn.commit()
 
     _cur.close()
-
 
 def dropTable(_conn):
     _cur = _conn.cursor()
@@ -55,7 +54,48 @@ def dropTable(_conn):
     _conn.commit()
     _cur.close()
 
+def populateTable(_conn):
+    print("++++++++++++++++++++++++++++++++++")
+    print("Populate table")
 
+    _cur = _conn.cursor()
+    _cur.execute("""
+    insert into credential (c_username, c_password) 
+    values ('JohnDoe', 'john')
+    """)
+    _cur.execute("""
+    insert into credential (c_username, c_password) 
+    values ('JaneDoe', 'jane')
+    """)
+
+    _cur.execute("""
+    insert into post (p_userid, p_question, p_upvotes, p_downvotes) 
+    values (1, 'Do you like cats or dogs?', 1, 0)
+    """)
+    _cur.execute("""
+    insert into post (p_userid, p_question, p_upvotes, p_downvotes) 
+    values (1, 'What classes are you taking?', 0, 1)
+    """)
+    _cur.execute("""
+    insert into post (p_userid, p_question, p_upvotes, p_downvotes) 
+    values (2, 'To be or not to be?', 2, 0)
+    """)
+
+    _cur.execute("""
+    insert into response (r_postId, r_userid, r_response, r_upvotes, r_downvotes) 
+    values (1, 2, 'Cats!', 0, 0)
+    """)
+    _cur.execute("""
+    insert into response (r_postId, r_userid, r_response, r_upvotes, r_downvotes) 
+    values (3, 1, 'What does this mean?', 1, 1)
+    """)
+    _cur.execute("""
+    insert into response (r_postId, r_userid, r_response, r_upvotes, r_downvotes) 
+    values (3, 2, 'That is the question.', 2, 1)
+    """)
+
+    _conn.commit()
+    _cur.close()
 
 def main():
     _conn = None
@@ -67,6 +107,7 @@ def main():
     
     dropTable(_conn)
     createTable(_conn)
+    populateTable(_conn)
 
     try:
         _conn.close()
