@@ -7,7 +7,7 @@ def createTable(_conn):
     create table if not exists credential (
         c_id integer primary key,
         c_name char(100),
-        c_username char(100) not null,
+        c_username char(100) not null unique,
         c_password char(100) not null
     );
     """)
@@ -26,9 +26,10 @@ def createTable(_conn):
     create table if not exists response (
         r_id integer primary key,
         r_postId char(100) not null,
-        p_response char(300) not null,
-        p_upvotes integer not null,
-        p_downvotes integer not null
+        r_userId    
+        r_response char(300) not null,
+        r_upvotes integer not null,
+        r_downvotes integer not null
     );
     """)
     _conn.commit()
@@ -40,7 +41,7 @@ def dropTable(_conn):
     _cur = _conn.cursor()
 
     _cur.execute("""
-    drop table if exists credentials
+    drop table if exists credential
     """)
 
     _cur.execute("""
