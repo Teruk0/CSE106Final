@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign in</title>
   <link rel="stylesheet" href="login.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9/crypto-js.js"></script>
+
 </head>
 <body>
 
@@ -21,12 +23,12 @@
       <input type="text" placeholder="Username" name="username" required>
       <input type="password" placeholder="Password" name="password" required>
       <button type="submit">Sign In</button>
-      <button onclick="signUp()">Sign Up</button>
     </form>
+    <button onclick="signUp()">Sign Up</button>
   </div>
 
   <!-- Add a script to handle the form submission -->
-  <script>
+  <script type="text/javascript">
 
     function signUp() {
       window.location.href = "signup.html"
@@ -39,16 +41,31 @@
         const username = document.querySelector('input[name="username"]').value;
         const password = document.querySelector('input[name="password"]').value;
 
-        fetch(`http://localhost:3000/login?username=${username}&password=${password}`)
+        // Fetch the salt for the specified user from the server
+        fetch(`http://localhost:3000/login/salt?username=${username}`)
           .then(response => response.json())
           .then(data => {
-            if (data['message'].includes('Success')) {
-              window.location.href = `/forum.html?username=${username}`;
-            } else {
-              alert(data['message'])
-            }
-            console.log('Data added:', data);
-          })
+            const encodedSalt = data.c_salt;
+
+            // Decode the encoded salt
+            const salt = CryptoJS.enc.Base64.parse(encodedSalt);
+
+            // Hash the password with CryptoJS SHA-256 and the retrieved salt
+            const hashedPassword = CryptoJS.SHA256(password + salt).toString();
+            // console.log(hashedPassword)
+
+            // Send the hashed password to the server for verification
+            fetch(`http://localhost:3000/login?username=${username}&password=${hashedPassword}`)
+              .then(response => response.json())
+              .then(data => {
+                if (data['message'].includes('Success')) {
+                  window.location.href = `/forum.html?username=${username}`;
+                } else {
+                  alert(data['message'])
+                }
+                console.log('Data added:', data);
+              });
+          });
       });
     });
   </script>

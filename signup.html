@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
   <link rel="stylesheet" href="signup.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9/crypto-js.js"></script>
 </head>
 <body>
 
@@ -25,17 +26,25 @@
   </div>
 
   <!-- Add a script to handle the form submission -->
-  <script>
+  <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
   
         const username = document.querySelector('input[name="username"]').value;
         const password = document.querySelector('input[name="password"]').value;
+
+        const salt = CryptoJS.lib.WordArray.random(16); // 16 bytes (128 bits)
+
+        // Combine the password and salt, then hash with CryptoJS SHA-256
+        const hashedPassword = CryptoJS.SHA256(password + salt).toString();
+
         const data = {
           "username": username,
-          "password": password
+          "password": hashedPassword,
+          "salt": salt.toString(CryptoJS.enc.Base64) // Convert salt to Base64 for storage
         };
+
         // console.log(data)
         fetch('http://localhost:3000/signup', {
             method: 'POST',
@@ -50,6 +59,9 @@
               alert('Username already exists')
             }
             console.log('Data added:', data);
+            document.querySelector('input[name="username"]').value = ''
+            document.querySelector('input[name="password"]').value = ''
+            alert('account created! Head back to Login Page.')
           })
       });
     });

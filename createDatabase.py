@@ -8,7 +8,8 @@ def createTable(_conn):
         c_id integer primary key,
         c_name char(100),
         c_username char(100) not null unique,
-        c_password char(100) not null
+        c_password char(100) not null,
+        c_salt char(300)
     );
     """)
 
@@ -74,12 +75,12 @@ def populateTable(_conn):
 
     _cur = _conn.cursor()
     _cur.execute("""
-    insert into credential (c_username, c_password) 
-    values ('JohnDoe', 'john')
+    insert into credential (c_username, c_password, c_salt) 
+    values ('JohnDoe', 'be68b7567183cc5b29e72742b00e12b5e859eb410d4a8669d13690e738590eb9', 'tCPSZZBs425tAJjcb4/OEw==')
     """)
     _cur.execute("""
-    insert into credential (c_username, c_password) 
-    values ('JaneDoe', 'jane')
+    insert into credential (c_username, c_password, c_salt) 
+    values ('JaneDoe', '21c251bc65ebeb13dc88c64d4ee8489ee3ebcb560b622ed49d489e8499d6c9d4', 'pB1SXmbs7pY2fl6LLemPAA==')
     """)
 
     _cur.execute("""

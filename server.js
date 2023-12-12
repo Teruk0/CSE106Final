@@ -57,12 +57,36 @@ app.get('/login', (req, res) => {
     });
   });
 
+  app.get('/login/salt', (req, res) => {
+    const username = req.query.username;
+
+    // console.log(username)
+    // console.log(password)
+  
+    // Replace this logic with your actual authentication logic (querying the database, etc.)
+    const query = `SELECT c_salt FROM credential WHERE c_username = ?`;
+    db.get(query, [username], (err, row) => {
+      if (err) {
+        console.log('Error querying database:', err.message);
+        res.status(500).json({ message: err.message });
+        return;
+      }
+      // console.log(row)
+      if (row) {
+        res.status(200).json(row);
+        // res.redirect(`/forum/${username}`);
+      } else {
+        res.json({message: 'Wrong Username or no Salt.'});
+      }
+    });
+  });
+
 app.post('/signup', (req, res) => {
-  const { username, password } = req.body;
-  // console.log(username)
-  // console.log(password)
+  const { username, password, salt } = req.body;
+  console.log(password)
+  console.log(salt)
   // Replace this logic with your actual authentication logic (querying the database, etc.)
-  db.run(`INSERT INTO credential (c_username, c_password) VALUES (?, ?)`, [username, password], (err, row) => {
+  db.run(`INSERT INTO credential (c_username, c_password, c_salt) VALUES (?, ?, ?)`, [username, password, salt], (err, row) => {
     if (err) {
       console.log('Error querying database:', err.message);
       res.status(500).json({ message: err.message });
