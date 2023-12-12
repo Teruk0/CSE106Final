@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum App</title>
+    <title>UCM Student Forum</title>
     <link rel="stylesheet" type="text/css" href="forum.css">
 </head>
 <body>
 
 <div id="header-container">
     <div id="logo-container">
-        <a href="https://www.ucmerced.edu/">
+        <a href="https://www.ucmerced.edu/" target="_blank">
             <img src="ucm.jpg" alt="Logo">
         </a>
     </div>
@@ -21,21 +21,114 @@
     </div>
 </div>
 
-<div id="question-container">
-    <div id="question-input">
-        <input type="text" id="question-text" placeholder="Enter your question... (300 Character limit)">
-        <button onclick="postQuestion()">Post</button>
-        <div id="filter-container">
-            <div id="filter-input">
-                <input type="text" id="filter-text" placeholder="Filter or search questions...">
-                <button onclick="search()">Search</button>
-            </div>
+<div id = "main-container">
+    <div id="forum-rules-container">
+        <div id="forum-rules">
+            <h2>Forum Rules:</h2>
+            <ol>
+                <li><strong>Respect Others:</strong>
+                    <ul>
+                        <li>Be courteous and respectful to fellow members.</li>
+                        <li>Avoid personal attacks, insults, or offensive language.</li>
+                    </ul>
+                </li>
+                <li><strong>No Hate Speech or Harassment:</strong>
+                    <ul>
+                        <li>Do not post content that promotes discrimination, hate speech, or harassment.</li>
+                        <li>Treat all members with dignity and respect, regardless of their background.</li>
+                    </ul>
+                </li>
+                <li><strong>Stay on Topic:</strong>
+                    <ul>
+                        <li>Keep discussions relevant to the forum's purpose.</li>
+                        <li>Start new threads for new topics and contribute to existing ones.</li>
+                    </ul>
+                </li>
+                <li><strong>No Spamming:</strong>
+                    <ul>
+                        <li>Avoid excessive self-promotion or spamming of links.</li>
+                        <li>Do not post the same content repeatedly.</li>
+                    </ul>
+                </li>
+                <li><strong>No Illegal Content:</strong>
+                    <ul>
+                        <li>Do not post or request any illegal or unethical content.</li>
+                        <li>Respect copyright laws and give credit where it's due.</li>
+                    </ul>
+                </li>
+                <li><strong>Use Appropriate Language:</strong>
+                    <ul>
+                        <li>Keep language and tone appropriate for all audiences.</li>
+                        <li>Refrain from using excessive profanity.</li>
+                    </ul>
+                </li>
+                <li><strong>No Trolling:</strong>
+                    <ul>
+                        <li>Do not post inflammatory or off-topic messages with the intent to provoke others.</li>
+                        <li>Engage in constructive discussions rather than disruptive behavior.</li>
+                    </ul>
+                </li>
+                <li><strong>Respect Privacy:</strong>
+                    <ul>
+                        <li>Do not share personal information about yourself or others.</li>
+                        <li>Respect the privacy of others, both on and off the forum.</li>
+                    </ul>
+                </li>
+                <li><strong>Report Inappropriate Content:</strong>
+                    <ul>
+                        <li>Report any content that violates the forum rules to the moderators.</li>
+                        <li>Help maintain a positive community by reporting inappropriate behavior.</li>
+                    </ul>
+                </li>
+                <li><strong>Moderator Instructions:</strong>
+                    <ul>
+                        <li>Follow the instructions of forum moderators.</li>
+                        <li>Contact moderators privately for specific concerns or disputes.</li>
+                    </ul>
+                </li>
+                <li><strong>Multiple Accounts:</strong>
+                    <ul>
+                        <li>Users should only have one account. Multiple accounts can lead to a ban.</li>
+                    </ul>
+                </li>
+                <li><strong>Signature and Avatar Guidelines:</strong>
+                    <ul>
+                        <li>If applicable, follow guidelines for signatures and avatars in terms of content and size.</li>
+                    </ul>
+                </li>
+                <li><strong>Be Constructive:</strong>
+                    <ul>
+                        <li>Provide constructive feedback and contribute positively to discussions.</li>
+                        <li>Avoid "trolling" or posting content without substance.</li>
+                    </ul>
+                </li>
+                <li><strong>Understand and Follow UC Student Rules:</strong>
+                    <ul>
+                        <li>Adhere to any additional rules or guidelines within accordance to the student handbook and <a href="https://osrr.ucmerced.edu/student-conduct/ucm-code-student-conduct" target="_blank">code of conduct.</a></li>
+                    </ul>
+                </li>
+            </ol>
         </div>
     </div>
 
-    <div id="questions-list">
-        <!-- Questions will be dynamically added here -->
-        <div id="replies-container"></div>
+
+    <div id="question-container">
+        <div id="question-input">
+            <input type="text" id="question-text" placeholder="Enter your question... (300 Character limit)">
+            <button id="post-button" onclick="postQuestion()">Post</button>
+        </div>
+
+        <div id="filter-container">
+            <div id="filter-input">
+                <input type="text" id="filter-text" placeholder="Filter or search questions...">
+                <button id="search-button" onclick="search()">Search</button>
+            </div>
+        </div>
+
+        <div id="questions-list">
+            <!-- Questions will be dynamically added here -->
+            <div id="replies-container"></div>
+        </div>
     </div>
 </div>
 
