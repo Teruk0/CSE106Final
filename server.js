@@ -32,28 +32,30 @@ app.use(express.static(path.join(__dirname)));
 
 // Handle form submission
 // Inside your login route
-// app.post('/login', (req, res) => {
-//     const { username, password } = req.body;
+app.get('/login', (req, res) => {
+    const username = req.query.username;
+    const password = req.query.password;
+
+    // console.log(username)
+    // console.log(password)
   
-//     // Replace this logic with your actual authentication logic (querying the database, etc.)
-//     const query = `SELECT c_username, c_password FROM credentials WHERE c_username = ? AND c_password = ?`;
-//     db.get(query, [username, password], (err, row) => {
-//       if (err) {
-//         console.error('Error querying database:', err.message);
-//         res.red('/?error=1');
-//         return;
-//       }
-  
-//       if (row) {
-//         const { username, password } = row;
-//         if (role === 'instructor') {
-//           res.redirect(`/forum/${username}`);  // Use the username here
-//         }
-//       } else {
-//         res.redirect('/?error=1');
-//       }
-//     });
-//   });
+    // Replace this logic with your actual authentication logic (querying the database, etc.)
+    const query = `SELECT c_username, c_password FROM credential WHERE c_username = ? AND c_password = ?`;
+    db.get(query, [username, password], (err, row) => {
+      if (err) {
+        console.log('Error querying database:', err.message);
+        res.status(500).json({ message: err.message });
+        return;
+      }
+      // console.log(row)
+      if (row) {
+        res.status(200).json({ message: 'Sign in Successful!' });
+        // res.redirect(`/forum/${username}`);
+      } else {
+        res.json({message: 'Username or Password is Incorrect.'});
+      }
+    });
+  });
 
   app.post('/signup', (req, res) => {
     const { username, password } = req.body;
@@ -69,6 +71,35 @@ app.use(express.static(path.join(__dirname)));
         console.log('Data added Successfully');
         res.status(200).json({ message: 'Data added Successfully' });
       }
+    });
+  });
+
+  app.get('/forum/:username', (req, res) => {
+    const username = req.params.username;
+    console.log('Username:', username);
+      
+    db.get(`SELECT c_id FROM credential WHERE c_username = ?`, [username], (userErr, userRow) => {
+      if (userErr) {
+        console.error('Error querying database:', userErr.message);
+        res.status(500).json({ message: userErr.message });
+        return;
+      }
+      console.log(userRow)
+      const userId = userRow;
+  
+      const postQuery = `
+        SELECT p_id, p_question, p_upvotes, p_downvotes
+        FROM post
+        WHERE p_userId = ?;
+      `;
+
+      db.all(postQuery, [userId], (postErr, postRow) => {
+        if (postErr) {
+          console.error('Error querying database:', postErr.message);
+          res.status(500).send('Internal Server Error');
+          return;
+        }
+      });
     });
   });
 
