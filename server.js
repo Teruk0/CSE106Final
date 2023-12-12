@@ -57,13 +57,14 @@ app.use(express.static(path.join(__dirname)));
 
   app.post('/signup', (req, res) => {
     const { username, password } = req.body;
-    console.log(username)
-    console.log(password)
+    // console.log(username)
+    // console.log(password)
     // Replace this logic with your actual authentication logic (querying the database, etc.)
     db.run(`INSERT INTO credential (c_username, c_password) VALUES (?, ?)`, [username, password], (err, row) => {
       if (err) {
         console.log('Error querying database:', err.message);
-        res.status(500).json({ error: 'Internal Server Error', details: err.message });        return;
+        res.status(500).json({ message: err.message });
+        return;
       } else {
         console.log('Data added Successfully');
         res.status(200).json({ message: 'Data added Successfully' });

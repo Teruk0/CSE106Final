@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign in</title>
-  <link rel="stylesheet" href="login.css">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="signup.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
     <form action="/login" method="POST">
       <input type="text" placeholder="Username" name="username" required>
       <input type="password" placeholder="Password" name="password" required>
-      <button type="submit">Sign In</button>
+      <button type="submit">Sign Up</button>
     </form>
   </div>
 
@@ -32,9 +32,25 @@
   
         const username = document.querySelector('input[name="username"]').value;
         const password = document.querySelector('input[name="password"]').value;
-  
-        // Redirect to the appropriate route with the user ID
-        window.location.href = '/my-classes/' + username;
+        const data = {
+          "username": username,
+          "password": password
+        };
+        // console.log(data)
+        fetch('http://localhost:3000/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data['message'].includes('UNIQUE')) {
+              alert('Username already exists')
+            }
+            console.log('Data added:', data);
+          })
       });
     });
   </script>
