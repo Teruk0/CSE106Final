@@ -1,5 +1,6 @@
-// Store question data including votes and whether the user has voted
+// Store question data including votes
 const questionsData = [];
+const userVotes = [];
 
 function postQuestion() {
     // Get the question text from the input
@@ -10,7 +11,7 @@ function postQuestion() {
     if (questionText === "") {
         alert('Error: Please enter a question before posting.');
         return;
-    }    
+    }
 
     // Check if the question exceeds the character limit
     const characterLimit = 300;
@@ -38,11 +39,13 @@ function postQuestion() {
     // Row 1: Username and Delete
     const row1 = document.createElement('div');
     row1.className = 'row1';
+    row1.style.display = 'flex';
+    row1.style.justifyContent = 'space-between'; // Align items to the right
 
     // Username div inside the question box
     const usernameDiv = document.createElement('div');
     usernameDiv.className = 'username-div';
-    usernameDiv.innerHTML = `<p>${actualUsername}</p>`; // Replace 'Username' with the actual username
+    usernameDiv.innerHTML = `<p style="color: white;">${actualUsername}</p>`; // Replace 'Username' with the actual username
     row1.appendChild(usernameDiv);
 
     // Delete button div inside the question box
@@ -83,9 +86,10 @@ function postQuestion() {
 
     // Clear the input field after posting
     questionInput.value = '';
-    
+
     question.replies = [];
 }
+
 
 function deleteQuestion(index) {
     // Assuming you have a way to get the actual username
@@ -195,7 +199,7 @@ function displayReply(questionIndex, replyIndex) {
     usernameDiv.className = 'username-div';
     // Assuming you have a way to get the actual username for the reply
     const actualUsername = "JohnDoe"; // Replace with the actual username
-    usernameDiv.innerHTML = `<p>${actualUsername}</p>`;
+    usernameDiv.innerHTML = `<p style="color: white;">${actualUsername}</p>`;
     replyContainer.appendChild(usernameDiv);
 
     // Display the reply text
@@ -258,4 +262,63 @@ function search() {
             questionElement.style.display = 'none';
         }
     });
+}
+
+function toggleReplyVote(questionIndex, replyIndex, voteType) {
+    const question = questionsData[questionIndex];
+    const reply = question.replies[replyIndex];
+
+    // Get the current user (replace with your actual method to get the user)
+    const currentUser = "JohnDoe";
+
+    // Check if the user has already voted on this reply
+    const userVote = userVotes[`${currentUser}_${questionIndex}_${replyIndex}`];
+
+    if (userVote) {
+        // User has voted, so remove their previous vote
+        removeUserVote(questionIndex, replyIndex, userVote);
+        userVotes[`${currentUser}_${questionIndex}_${replyIndex}`] = null;
+    }
+
+    // Update the vote count based on the vote type
+    if (voteType === 'upvote') {
+        reply.upvotes += 1;
+    } else if (voteType === 'downvote') {
+        reply.downvotes += 1;
+    }
+
+    // Set user's new vote
+    userVotes[`${currentUser}_${questionIndex}_${replyIndex}`] = voteType;
+
+    // Update the displayed vote counts
+    updateVoteCounts(questionIndex, replyIndex);
+}
+
+function removeUserVote(questionIndex, replyIndex, userVote) {
+    const question = questionsData[questionIndex];
+    const reply = question.replies[replyIndex];
+
+    // Remove the user's previous vote
+    if (userVote === 'upvote') {
+        reply.upvotes -= 1;
+    } else if (userVote === 'downvote') {
+        reply.downvotes -= 1;
+    }
+}
+
+function updateVoteCounts(questionIndex, replyIndex) {
+    const questionBox = document.getElementById(`question-box-${questionIndex}`);
+    const upvoteCountSpan = questionBox.querySelector('.upvote-count');
+    const downvoteCountSpan = questionBox.querySelector('.downvote-count');
+
+    if (!questionBox || !upvoteCountSpan || !downvoteCountSpan) {
+        console.error('Error: Question box or vote count spans not found.');
+        return;
+    }
+
+    const reply = questionsData[questionIndex].replies[replyIndex];
+
+    // Update the displayed vote counts
+    upvoteCountSpan.textContent = reply.upvotes;
+    downvoteCountSpan.textContent = reply.downvotes;
 }
