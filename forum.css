@@ -136,7 +136,7 @@ body {
   font-size: 16px; /* Adjust the font size as needed */
 }
 
-.reply-div,
+.reply-text,
 .question-div {
   width: 48%; /* Adjust the width to create two rows with some spacing */
   background-color: rgb(248, 217, 82);
