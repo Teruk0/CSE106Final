@@ -32,11 +32,21 @@ def createTable(_conn):
         r_downvotes integer not null
     );
     """)
+
+    _cur.execute("""
+    create table if not exists voted (
+        v_id integer primary key,
+        v_responseId integer not null,
+        v_userId integer not null,
+        v_voted char(100) not null,
+        v_type char(100) not null
+    );
+    """)
     _conn.commit()
 
     _cur.close()
 
-def dropTable(_conn):
+def dropAll(_conn):
     _cur = _conn.cursor()
 
     _cur.execute("""
@@ -49,6 +59,10 @@ def dropTable(_conn):
 
     _cur.execute("""
     drop table if exists response
+    """)
+
+    _cur.execute("""
+    drop table if exists voted
     """)
 
     _conn.commit()
@@ -91,7 +105,32 @@ def populateTable(_conn):
     """)
     _cur.execute("""
     insert into response (r_postId, r_userid, r_response, r_upvotes, r_downvotes) 
-    values (3, 2, 'That is the question.', 2, 1)
+    values (3, 2, 'That is the question.', 2, 0)
+    """)
+
+    _cur.execute("""
+    insert into voted (v_responseId, v_userId, v_voted, v_type) 
+    values (1, 1, 'false', 'none')
+    """)
+    _cur.execute("""
+    insert into voted (v_responseId, v_userId, v_voted, v_type) 
+    values (1, 2, 'false', 'none')
+    """)
+    _cur.execute("""
+    insert into voted (v_responseId, v_userId, v_voted, v_type) 
+    values (2, 1, 'true', 'upvote')
+    """)
+    _cur.execute("""
+    insert into voted (v_responseId, v_userId, v_voted, v_type) 
+    values (2, 2, 'true', 'downvote')
+    """)
+    _cur.execute("""
+    insert into voted (v_responseId, v_userId, v_voted, v_type) 
+    values (3, 1, 'true', 'upvote')
+    """)
+    _cur.execute("""
+    insert into voted (v_responseId, v_userId, v_voted, v_type) 
+    values (3, 2, 'true', 'upvote')
     """)
 
     _conn.commit()
@@ -105,7 +144,7 @@ def main():
     except Error as e:
         print(e)
     
-    dropTable(_conn)
+    dropAll(_conn)
     createTable(_conn)
     populateTable(_conn)
 
