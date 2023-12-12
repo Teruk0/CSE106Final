@@ -5,47 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
   <link rel="stylesheet" href="signup.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9/crypto-js.js"></script>
 </head>
 <body>
 
   <div id="header-container">
+    <div id="bobcat-answers" class="gold-block">
+      <h1>Bobcat Answers</h1>
+    </div>
     <div id="logo-container">
-        <a href="https://www.ucmerced.edu/">
-            <img src="ucm.jpg" alt="Logo">
-        </a>
+      <a href="https://www.ucmerced.edu/">
+        <img src="ucm.jpg" alt="Logo">
+      </a>
+    </div>
+    <div id="signup-heading">
+      <h1>Sign Up</h1>
+    </div>
+    <p class="subtitle">A place where you can gain insight into the UC Merced Community</p>
   </div>
 
-  <div id="signin-container">
-    <!-- Add the action attribute to point to the login endpoint -->
-    <form action="/login" method="POST">
-      <input type="text" placeholder="Username" name="username" required>
-      <input type="password" placeholder="Password" name="password" required>
-      <button type="submit">Sign Up</button>
-    </form>
+  <div id="main-container">
+    <div id="signin-container">
+      <form action="/login" method="POST">
+        <input type="text" placeholder="Username" name="username" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <button type="submit">Create An Account</button>
+      </form>
+      <p>Already have an account? <a href="login.html">Log In</a></p>
+    </div>
+
+    <div id="description-container">
+      <p>
+        A forum for students at the University of California, Merced (UCM) designed in the style
+        of a question-and-answer platform, serving as an online community hub. This forum allows
+        students to actively engage in discussions, ask questions, and share insights related to
+        UCM and student life.
+      </p>
+    </div>
   </div>
 
-  <!-- Add a script to handle the form submission -->
-  <script type="text/javascript">
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
   
         const username = document.querySelector('input[name="username"]').value;
         const password = document.querySelector('input[name="password"]').value;
-
-        const salt = CryptoJS.lib.WordArray.random(16); // 16 bytes (128 bits)
-
-        // Combine the password and salt, then hash with CryptoJS SHA-256
-        const hashedPassword = CryptoJS.SHA256(password + salt).toString();
-
         const data = {
           "username": username,
-          "password": hashedPassword,
-          "salt": salt.toString(CryptoJS.enc.Base64) // Convert salt to Base64 for storage
+          "password": password
         };
-
-        // console.log(data)
+  
         fetch('http://localhost:3000/signup', {
             method: 'POST',
             headers: {
@@ -59,12 +68,16 @@
               alert('Username already exists')
             }
             console.log('Data added:', data);
-            document.querySelector('input[name="username"]').value = ''
-            document.querySelector('input[name="password"]').value = ''
-            alert('account created! Head back to Login Page.')
           })
       });
     });
   </script>
+
+  <div id="footer-container" class="gold-block">
+    <a href="https://www.ucmerced.edu/" style="color: #fff; text-decoration: none;">
+      Visit UC Merced
+    </a>
+  </div>
+
 </body>
 </html>
