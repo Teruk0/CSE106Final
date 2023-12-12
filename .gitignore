@@ -1,0 +1,50 @@
+# Dependency directories
+node_modules/
+
+# Environment variables file
+.env
+
+# Log files
+logs/
+*.log
+
+# Output of 'npm pack'
+*.tgz
+
+# Visual Studio Code settings
+.vscode/
+
+# Mac specific files
+.DS_Store
+
+# SQLite database file
+*.sqlite
+
+# Heroku-specific files
+*.heroku/
+*.profile.d/
+
+# System files
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# IDE configuration
+.idea/
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Compiled binary extensions
+*.dll
+*.exe
+*.o
+*.obj
+*.pyc
+
+# Caches and build directories
+.cache/
+.build/
+dist/
