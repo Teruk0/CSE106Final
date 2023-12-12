@@ -21,20 +21,34 @@
       <input type="text" placeholder="Username" name="username" required>
       <input type="password" placeholder="Password" name="password" required>
       <button type="submit">Sign In</button>
+      <button onclick="signUp()">Sign Up</button>
     </form>
   </div>
 
   <!-- Add a script to handle the form submission -->
   <script>
+
+    function signUp() {
+      window.location.href = "signup.html"
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
   
         const username = document.querySelector('input[name="username"]').value;
         const password = document.querySelector('input[name="password"]').value;
-  
-        // Redirect to the appropriate route with the user ID
-        window.location.href = '/my-classes/' + username;
+
+        fetch(`http://localhost:3000/login?username=${username}&password=${password}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data['message'].includes('Success')) {
+              window.location.href = `/forum.html?username=${username}`;
+            } else {
+              alert(data['message'])
+            }
+            console.log('Data added:', data);
+          })
       });
     });
   </script>
