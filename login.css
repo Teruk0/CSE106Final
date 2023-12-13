@@ -99,7 +99,7 @@ button:hover {
 
 #main-container {
   display: flex;
-  justify-content: center; /* Center the content horizontally */
+  justify-content: center; 
   align-items: flex-start;
   max-width: 800px;
   margin: 0 auto;
@@ -137,5 +137,5 @@ button:hover {
   padding: 10px;
   width: 100%;
   text-align: center;
-  margin: 0; /* Adjusted margin to zero */
+  margin: 0; 
 }
