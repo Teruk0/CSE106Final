@@ -25,21 +25,21 @@
     <p class="subtitle">A place where you can gain insight into the UC Merced Community</p>
   </div>
 
-  <div id="main-container">
-    <div id="login-container">
-      <form action="/login" method="POST">
-        <input type="text" placeholder="Username" name="username" required>
-        <input type="password" placeholder="Password" name="password" required>
-        <button type="submit">Log In</button>
-      </form>
-      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-    </div>
+  <div id="login-container">
+    <!-- Add the action attribute to point to the login endpoint -->
+    <form action="/login" method="POST">
+      <input type="text" placeholder="Username" name="username" required>
+      <input type="password" placeholder="Password" name="password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
   </div>
 
+  <!-- Add a script to handle the form submission -->
   <script type="text/javascript">
 
-    function logIn() {
-      window.location.href = "login.html"
+    function signUp() {
+      window.location.href = "signup.html"
     }
 
     document.addEventListener('DOMContentLoaded', function() {
