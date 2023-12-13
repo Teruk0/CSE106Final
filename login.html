@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign in</title>
+  <title>Log in</title>
   <link rel="stylesheet" href="login.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9/crypto-js.js"></script>
 
@@ -11,27 +11,36 @@
 <body>
 
   <div id="header-container">
+    <div id="bobcat-answers" class="gold-block">
+      <h1>Bobcat Answers</h1>
+    </div>
     <div id="logo-container">
-        <a href="https://www.ucmerced.edu/">
-            <img src="ucm.jpg" alt="Logo">
-        </a>
+      <a href="https://www.ucmerced.edu/">
+        <img src="ucm.jpg" alt="Logo">
+      </a>
+    </div>
+    <div id="login-heading">
+      <h1>Log In</h1>
+    </div>
+    <p class="subtitle">A place where you can gain insight into the UC Merced Community</p>
   </div>
 
-  <div id="signin-container">
-    <!-- Add the action attribute to point to the login endpoint -->
-    <form action="/login" method="POST">
-      <input type="text" placeholder="Username" name="username" required>
-      <input type="password" placeholder="Password" name="password" required>
-      <button type="submit">Sign In</button>
-    </form>
-    <button onclick="signUp()">Sign Up</button>
+  <div id="main-container">
+    <div id="login-container">
+      <form action="/login" method="POST">
+        <input type="text" placeholder="Username" name="username" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <button type="submit">Log In</button>
+      </form>
+      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </div>
   </div>
 
   <!-- Add a script to handle the form submission -->
   <script type="text/javascript">
 
-    function signUp() {
-      window.location.href = "signup.html"
+    function logIn() {
+      window.location.href = "login.html"
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -69,5 +78,10 @@
       });
     });
   </script>
+  <div id="footer-container" class="gold-block">
+    <a href="https://www.ucmerced.edu/" style="color: #fff; text-decoration: none;">
+      Visit UC Merced
+    </a>
+  </div>
 </body>
 </html>
