@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 // Default HTML file: Login.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'login.html'));
+    res.sendFile(path.join(__dirname, 'signup.html'));
   });
 // CSS file
 app.use(express.static(path.join(__dirname)));
